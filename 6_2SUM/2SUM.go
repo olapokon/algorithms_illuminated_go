@@ -46,11 +46,13 @@ func main() {
 		nums[num] = num
 	}
 
-	c := make(chan int)
+	c := make(chan int, 8)
 	for i := -10000; i <= 8000; i += 2000 {
 		go TwoSUM(i, i+2000, nums, c)
 	}
-	c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 := <-c, <-c, <-c, <-c, <-c, <-c, <-c, <-c, <-c, <-c
-	count := c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 + c10
+	var count int
+	for i := 0; i < 10; i++ {
+		count += <-c
+	}
 	fmt.Println(count)
 }
