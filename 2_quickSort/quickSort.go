@@ -21,7 +21,8 @@ func choosePivot(input []int, left, right int) int {
 
 func medianOfThree(input []int, left, right int) int {
 	mid := left + ((right - left) / 2)
-	if input[left] < input[mid] {
+	switch {
+	case input[left] < input[mid]:
 		if input[left] > input[right] {
 			return left
 		}
@@ -29,11 +30,9 @@ func medianOfThree(input []int, left, right int) int {
 			return right
 		}
 		return mid
-	}
-	if input[mid] > input[right] {
+	case input[mid] > input[right]:
 		return mid
-	}
-	if input[left] < input[right] {
+	case input[left] < input[right]:
 		return left
 	}
 	return right
@@ -44,15 +43,12 @@ func partition(input []int, left, right int) int {
 	i := left + 1
 	for j := left + 1; j <= right; j++ {
 		if input[j] < p {
-			temp := input[j]
-			input[j] = input[i]
-			input[i] = temp
+			input[j], input[i] = input[i], input[j]
 			i++
 		}
 	}
-	temp := input[left]
-	input[left] = input[i-1]
-	input[i-1] = temp
+	input[left], input[i-1] = input[i-1], input[left]
+
 	return i - 1
 }
 
@@ -64,9 +60,7 @@ func QuickSort(input []int, left, right int) int {
 	i := choosePivot(input, left, right)
 
 	// swap pivot to leftmost position
-	temp := input[left]
-	input[left] = input[i]
-	input[i] = temp
+	input[left], input[i] = input[i], input[left]
 
 	// new pivot position
 	j := partition(input, left, right)

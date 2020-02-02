@@ -24,10 +24,10 @@ type numSCC struct {
 	v int
 }
 
-/* Input: directed acyclic graph G = (V, E) in
-adjacency-list representation.
-Postcondition: the f -values of vertices constitute a
-topological ordering of G. */
+// Input: directed acyclic graph G = (V, E) in
+// adjacency-list representation.
+// Postcondition: the f -values of vertices constitute a
+// topological ordering of G.
 func topoSort(edges map[int][]int, vertices map[int]*vertex) {
 	curLabel := curLabel{len(vertices)}
 	for k, v := range vertices {
@@ -37,10 +37,10 @@ func topoSort(edges map[int][]int, vertices map[int]*vertex) {
 	}
 }
 
-/* Input: graph G = (V, E) in adjacency-list
-representation, and a vertex s in V .
-Postcondition: every vertex reachable from s is
-marked as “explored” and has an assigned f -value. */
+// Input: graph G = (V, E) in adjacency-list
+// representation, and a vertex s in V .
+// Postcondition: every vertex reachable from s is
+// marked as “explored” and has an assigned f -value.
 func dFSTopo(edges map[int][]int, vertices map[int]*vertex, s int, curLabel *curLabel) {
 	(*vertices[s]).explored = true
 	for _, v := range edges[s] {
@@ -52,10 +52,10 @@ func dFSTopo(edges map[int][]int, vertices map[int]*vertex, s int, curLabel *cur
 	(*curLabel).v--
 }
 
-/* Input: directed graph G = (V, E) in adjacency-list
-representation, and a vertex s in V .
-Postcondition: every vertex reachable from s is
-marked as “explored” and has an assigned scc-value. */
+// Input: directed graph G = (V, E) in adjacency-list
+// representation, and a vertex s in V .
+// Postcondition: every vertex reachable from s is
+// marked as “explored” and has an assigned scc-value.
 func dFSSCC(edges map[int][]int, vertices map[int]*vertex, s int, numSCC *numSCC) {
 	(*vertices[s]).explored = true
 
@@ -70,10 +70,11 @@ func dFSSCC(edges map[int][]int, vertices map[int]*vertex, s int, numSCC *numSCC
 }
 
 // Kosaraju detects the strongly connected components of a directed graph.
-/* Input: directed graph G = (V, E) in adjacency-list
-representation, with V = {1, 2, 3, . . . , n}
-Postcondition: for every v, w in V , scc(v) = scc(w)
-if and only if v, w are in the same SCC of G. */
+//
+// Input: directed graph G = (V, E) in adjacency-list
+// representation, with V = {1, 2, 3, . . . , n}
+// Postcondition: for every v, w in V , scc(v) = scc(w)
+// if and only if v, w are in the same SCC of G.
 func Kosaraju(edges, edgesRev map[int][]int, vertices map[int]*vertex) []int {
 
 	// first pass of depth-first search
