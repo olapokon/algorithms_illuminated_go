@@ -9,7 +9,15 @@ import (
 	"strconv"
 )
 
-type intHeap []int
+type (
+	intHeap []int
+	minHeap struct {
+		intHeap
+	}
+	maxHeap struct {
+		intHeap
+	}
+)
 
 func (h intHeap) Len() int           { return len(h) }
 func (h intHeap) Less(i, j int) bool { return h[i] < h[j] }
@@ -25,14 +33,6 @@ func (h *intHeap) Pop() interface{} {
 	x := old[n-1]
 	*h = old[0 : n-1]
 	return x
-}
-
-type minHeap struct {
-	intHeap
-}
-
-type maxHeap struct {
-	intHeap
 }
 
 func (h maxHeap) Less(i, j int) bool { return h.intHeap[i] > h.intHeap[j] }
